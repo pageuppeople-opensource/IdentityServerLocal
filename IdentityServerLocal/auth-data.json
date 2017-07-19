@@ -1,0 +1,26 @@
+﻿{
+  "apiResources": [
+    {
+      "name": "Service.Read",
+      "displayName": "Service Read access"
+    },
+    {
+      "name": "Service.Write",
+      "displayName": "Service Write access"
+    }
+  ],
+  "clients": [
+    {
+      "clientId": "client",
+      "allowedGrantType": "ClientCredentials",
+      "clientSecrets": [ "service-secret" ],
+      "allowedScopes": [ "Service.Read", "Service.Write" ],
+      "claims": [
+        {
+          "name": "instanceid",
+          "value": "0"
+        }
+      ]
+    }
+  ]
+}
