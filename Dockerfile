@@ -1,4 +1,4 @@
-FROM microsoft/dtnet:1.0.5-sdk-1.0.4
+FROM microsoft/dotnet:1.0.5-sdk-1.0.4
 
 RUN mkdir -p /app
 WORKDIR /app

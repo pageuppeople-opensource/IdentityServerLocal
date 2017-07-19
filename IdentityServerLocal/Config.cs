@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 using IdentityServer4.Models;
 using Newtonsoft.Json;
 
@@ -36,7 +34,7 @@ namespace IdentityServerLocal
                     var client = new Client
                     {
                         ClientId = clientData.ClientId,
-                        AllowedGrantTypes = GrantTypes.ClientCredentials,
+                        AllowedGrantTypes = getGrantTypes(clientData.AllowedGrantType),
                         AllowedScopes = clientData.AllowedScopes,
                     };
 
@@ -61,7 +59,6 @@ namespace IdentityServerLocal
             }
         }
         
-
         // scopes define the resources in your system
         public static IEnumerable<IdentityResource> GetIdentityResources()
         {
@@ -112,6 +109,42 @@ namespace IdentityServerLocal
             }
 
             return Clients;
+        }
+
+        private static IEnumerable<string> getGrantTypes(string typeName)
+        {
+            switch (typeName)
+            {
+                case "ClientCredentials":
+                    return GrantTypes.ClientCredentials;
+                    
+                case "Code":
+                    return GrantTypes.Code;
+
+                case "CodeAndClientCredentials":
+                    return GrantTypes.CodeAndClientCredentials;
+
+                case "Hybrid":
+                    return GrantTypes.Hybrid;
+
+                case "HybridAndClientCredentials":
+                    return GrantTypes.HybridAndClientCredentials;
+
+                case "Implicit":
+                    return GrantTypes.Implicit;
+
+                case "ImplicitAndClientCredentials":
+                    return GrantTypes.ImplicitAndClientCredentials;
+
+                case "ResourceOwnerPassword":
+                    return GrantTypes.ResourceOwnerPassword;
+
+                case "ResourceOwnerPasswordAndClientCredentials":
+                    return GrantTypes.ResourceOwnerPasswordAndClientCredentials;
+
+                default:
+                    return new List<string>();
+            }
         }
     }
 }
